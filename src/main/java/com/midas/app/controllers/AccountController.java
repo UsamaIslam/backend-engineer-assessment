@@ -6,6 +6,7 @@ import com.midas.app.services.AccountService;
 import com.midas.generated.api.AccountsApi;
 import com.midas.generated.model.AccountDto;
 import com.midas.generated.model.CreateAccountDto;
+import com.stripe.exception.StripeException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -28,16 +29,17 @@ public class AccountController implements AccountsApi {
    * @return User account created (status code 201)
    */
   @Override
-  public ResponseEntity<AccountDto> createUserAccount(CreateAccountDto createAccountDto) {
+  public ResponseEntity<AccountDto> createUserAccount(CreateAccountDto createAccountDto) throws StripeException {
     logger.info("Creating account for user with email: {}", createAccountDto.getEmail());
 
-    var account =
-        accountService.createAccount(
-            Account.builder()
-                .firstName(createAccountDto.getFirstName())
-                .lastName(createAccountDto.getLastName())
-                .email(createAccountDto.getEmail())
-                .build());
+    Account account =
+          accountService.createAccount(
+              Account.builder()
+                  .firstName(createAccountDto.getFirstName())
+                  .lastName(createAccountDto.getLastName())
+                  .email(createAccountDto.getEmail())
+                  .build());
+
 
     return new ResponseEntity<>(Mapper.toAccountDto(account), HttpStatus.CREATED);
   }

@@ -1,6 +1,7 @@
 package com.midas.app.exceptions;
 
 import com.midas.generated.model.ErrorDto;
+import com.stripe.exception.StripeException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import java.util.ArrayList;
@@ -184,6 +185,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             ex.getApiError().getCode(), ex.getApiError().getTitle(), ex.getApiError().getMessage());
 
     return ResponseEntity.status(ex.getApiError().getCode()).body(err);
+  }
+
+  @ExceptionHandler(StripeException.class)
+  public ResponseEntity<Object> handleStripeException(StripeException ex) {
+    ErrorDto err =
+        getErrorDto(
+            HttpStatus.valueOf(ex.getStripeError().getCode()),
+            ex.getStripeError().getType(),
+            ex.getStripeError().getMessage());
+
+    return ResponseEntity.status(Integer.parseInt(ex.getStripeError().getCode())).body(err);
   }
 
   @ExceptionHandler(InvalidRequestException.class)

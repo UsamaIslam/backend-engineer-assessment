@@ -1,6 +1,5 @@
 package com.midas.app.models;
 
-import com.midas.generated.model.AccountDto;
 import jakarta.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -31,7 +30,7 @@ public class Account {
   private String email;
 
   @Column(name = "provider_type", nullable = false) // Adding nullable = false to make it required
-  private AccountDto.ProviderTypeEnum providerType;
+  private String providerType;
 
   @Column(name = "provider_id", nullable = false) // Adding nullable = false to make it required
   private String providerId;
