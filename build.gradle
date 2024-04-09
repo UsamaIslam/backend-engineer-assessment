@@ -71,7 +71,7 @@ tasks.register('sonarlintListRules', SonarlintListRules) {
 }
 
 sonarlintMain {
-    source = fileTree("$layout.buildDirectory/src/main")
+    source = fileTree("$layout.projectDirectory/src/main")
     reports {
         html {
             enabled = true
