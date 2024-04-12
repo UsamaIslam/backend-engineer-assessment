@@ -14,7 +14,13 @@ public interface AccountService {
    */
   Account createAccount(Account details) throws StripeException;
 
+  /**
+   * update, updates an account and returns account.
+   *
+   * @return Account
+   */
   Account updateAccount(UUID userId, Account details) throws StripeException;
+
   /**
    * getAccounts returns a list of accounts.
    *

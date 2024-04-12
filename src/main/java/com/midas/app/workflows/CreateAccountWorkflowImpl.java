@@ -7,8 +7,6 @@ import io.temporal.activity.ActivityOptions;
 import io.temporal.spring.boot.WorkflowImpl;
 import io.temporal.workflow.Workflow;
 import java.time.Duration;
-import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 

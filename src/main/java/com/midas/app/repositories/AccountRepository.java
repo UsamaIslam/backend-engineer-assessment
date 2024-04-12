@@ -1,11 +1,10 @@
 package com.midas.app.repositories;
 
 import com.midas.app.models.Account;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AccountRepository extends JpaRepository<Account, String> {
-    Optional<Account> findById(UUID accountId);
+  Optional<Account> findById(UUID accountId);
 }

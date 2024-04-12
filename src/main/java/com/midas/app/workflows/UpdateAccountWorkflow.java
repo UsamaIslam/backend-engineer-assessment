@@ -4,12 +4,12 @@ import com.midas.app.models.Account;
 import com.stripe.exception.StripeException;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
-
 import java.util.UUID;
 
 @WorkflowInterface
 public interface UpdateAccountWorkflow {
   String UPDATE_QUEUE_NAME = "update-account-workflow";
+
   /**
    * updateAccount creates a new account in the system or provider.
    *

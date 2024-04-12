@@ -3,7 +3,6 @@ package com.midas.app.mappers;
 import com.midas.app.models.Account;
 import com.midas.app.providers.payment.CreateAccount;
 import com.midas.generated.model.AccountDto;
-import com.midas.generated.model.CreateAccountDto;
 import lombok.NonNull;
 
 public class Mapper {

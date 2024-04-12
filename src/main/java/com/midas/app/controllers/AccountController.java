@@ -10,7 +10,6 @@ import com.midas.generated.model.CreateAccountDto;
 import com.stripe.exception.StripeException;
 import java.util.List;
 import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,12 +66,14 @@ public class AccountController implements AccountsApi {
   }
 
   @Override
-  public ResponseEntity<AccountDto> updateUserAccount(UUID accountId, AccountDto accountDto) throws StripeException {
+  public ResponseEntity<AccountDto> updateUserAccount(UUID accountId, AccountDto accountDto)
+      throws StripeException {
     logger.info("Updating account with account id: {}", accountId);
 
     Account account = new Account();
     Mapper.updateAccountFromDTO(account, accountDto);
 
-    return new ResponseEntity<>(Mapper.toAccountDto(accountService.updateAccount(accountId, account)), HttpStatus.CREATED);
+    return new ResponseEntity<>(
+        Mapper.toAccountDto(accountService.updateAccount(accountId, account)), HttpStatus.CREATED);
   }
 }

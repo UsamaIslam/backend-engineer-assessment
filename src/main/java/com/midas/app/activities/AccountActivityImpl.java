@@ -8,15 +8,14 @@ import com.midas.app.repositories.AccountRepository;
 import com.stripe.exception.StripeException;
 import io.temporal.spring.boot.ActivityImpl;
 import io.temporal.workflow.Workflow;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 @RequiredArgsConstructor
-@ActivityImpl(taskQueues = {"create-account-workflow","update-account-workflow"})
+@ActivityImpl(taskQueues = {"create-account-workflow", "update-account-workflow"})
 public class AccountActivityImpl implements AccountActivity {
   private final Logger logger = Workflow.getLogger(AccountActivityImpl.class);
 
@@ -36,9 +35,12 @@ public class AccountActivityImpl implements AccountActivity {
     logger.info("Initiating updateAccount for account with ID {}", accountId);
 
     // Retrieve the existing account from the repository
-    Account existingAccount = accountRepository.findById(accountId)
-            .orElseThrow(() -> new ResourceNotFoundException("Account not found with ID: " + accountId));
-    if(existingAccount != null) {
+    Account existingAccount =
+        accountRepository
+            .findById(accountId)
+            .orElseThrow(
+                () -> new ResourceNotFoundException("Account not found with ID: " + accountId));
+    if (existingAccount != null) {
       Mapper.updateAccount(existingAccount, account);
       return accountRepository.save(existingAccount);
     }
@@ -54,10 +56,9 @@ public class AccountActivityImpl implements AccountActivity {
 
   @Override
   public Account updatePaymentAccount(Account account) throws StripeException {
-    if(account == null){
+    if (account == null) {
       throw new ResourceNotFoundException("Account is Null");
     }
     return stripePaymentProvider.updateAccount(account);
-
   }
 }

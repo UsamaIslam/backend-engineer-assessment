@@ -7,15 +7,12 @@ import com.midas.generated.model.AccountDto;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
-import com.stripe.model.billingportal.Configuration;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerUpdateParams;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @Getter
@@ -60,8 +57,11 @@ public class StripePaymentProvider implements PaymentProvider {
 
   @Override
   public Account updateAccount(Account details) throws StripeException {
-    CustomerUpdateParams customerUpdateParams = CustomerUpdateParams.builder().setName(details.getFirstName() + " " + details.getLastName())
-            .setEmail(details.getEmail()).build();
+    CustomerUpdateParams customerUpdateParams =
+        CustomerUpdateParams.builder()
+            .setName(details.getFirstName() + " " + details.getLastName())
+            .setEmail(details.getEmail())
+            .build();
     Customer customer = Customer.retrieve(details.getProviderId());
     customer.update(customerUpdateParams);
     return details;

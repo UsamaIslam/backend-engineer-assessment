@@ -4,7 +4,6 @@ import com.midas.app.models.Account;
 import com.stripe.exception.StripeException;
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
-
 import java.util.UUID;
 
 @ActivityInterface
@@ -20,6 +19,7 @@ public interface AccountActivity {
 
   @ActivityMethod
   Account updateAccount(UUID accountId, Account account);
+
   /**
    * createPaymentAccount creates a payment account in the system or provider.
    *
