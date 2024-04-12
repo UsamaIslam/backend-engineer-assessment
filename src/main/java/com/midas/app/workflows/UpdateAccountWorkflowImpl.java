@@ -6,17 +6,17 @@ import com.stripe.exception.StripeException;
 import io.temporal.activity.ActivityOptions;
 import io.temporal.spring.boot.WorkflowImpl;
 import io.temporal.workflow.Workflow;
-import java.time.Duration;
-import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 
-@RequiredArgsConstructor
-@WorkflowImpl(taskQueues = "create-account-workflow")
-public class CreateAccountWorkflowImpl implements CreateAccountWorkflow {
+import java.time.Duration;
+import java.util.UUID;
 
-  private final Logger logger = Workflow.getLogger(CreateAccountWorkflowImpl.class);
+@RequiredArgsConstructor
+@WorkflowImpl(taskQueues = "update-account-workflow")
+public class UpdateAccountWorkflowImpl implements UpdateAccountWorkflow {
+
+  private final Logger logger = Workflow.getLogger(UpdateAccountWorkflowImpl.class);
 
   private final AccountActivity accountActivity =
       Workflow.newActivityStub(
@@ -24,8 +24,7 @@ public class CreateAccountWorkflowImpl implements CreateAccountWorkflow {
           ActivityOptions.newBuilder().setStartToCloseTimeout(Duration.ofSeconds(2)).build());
 
   @Override
-  public Account createAccount(Account details) throws StripeException {
-    logger.info("initiating workflow inside to create account for email: {}", details.getEmail());
-    return accountActivity.saveAccount(accountActivity.createPaymentAccount(details));
+  public Account updateAccount(UUID accountId, Account details) throws StripeException {
+    return accountActivity.updatePaymentAccount(accountActivity.updateAccount(accountId, details));
   }
 }

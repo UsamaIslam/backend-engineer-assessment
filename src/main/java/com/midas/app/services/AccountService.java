@@ -3,6 +3,7 @@ package com.midas.app.services;
 import com.midas.app.models.Account;
 import com.stripe.exception.StripeException;
 import java.util.List;
+import java.util.UUID;
 
 public interface AccountService {
   /**
@@ -13,6 +14,7 @@ public interface AccountService {
    */
   Account createAccount(Account details) throws StripeException;
 
+  Account updateAccount(UUID userId, Account details) throws StripeException;
   /**
    * getAccounts returns a list of accounts.
    *

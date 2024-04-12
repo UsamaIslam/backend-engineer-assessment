@@ -3,6 +3,7 @@ package com.midas.app.mappers;
 import com.midas.app.models.Account;
 import com.midas.app.providers.payment.CreateAccount;
 import com.midas.generated.model.AccountDto;
+import com.midas.generated.model.CreateAccountDto;
 import lombok.NonNull;
 
 public class Mapper {
@@ -37,5 +38,31 @@ public class Mapper {
         .lastName(account.getLastName())
         .email(account.getEmail())
         .build();
+  }
+
+  public static void updateAccount(Account updateAccount, Account account) {
+    if (account.getFirstName() != null) {
+      updateAccount.setFirstName(account.getFirstName());
+    }
+    if (account.getLastName() != null) {
+      updateAccount.setLastName(account.getLastName());
+    }
+    if (account.getEmail() != null) {
+      updateAccount.setEmail(account.getEmail());
+    }
+    // Add other fields as needed
+  }
+
+  public static void updateAccountFromDTO(Account updateAccount, AccountDto account) {
+    if (account.getFirstName() != null) {
+      updateAccount.setFirstName(account.getFirstName());
+    }
+    if (account.getLastName() != null) {
+      updateAccount.setLastName(account.getLastName());
+    }
+    if (account.getEmail() != null) {
+      updateAccount.setEmail(account.getEmail());
+    }
+    // Add other fields as needed
   }
 }

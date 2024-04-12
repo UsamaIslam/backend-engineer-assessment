@@ -5,10 +5,11 @@ import com.stripe.exception.StripeException;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 
+import java.util.UUID;
+
 @WorkflowInterface
 public interface CreateAccountWorkflow {
   String QUEUE_NAME = "create-account-workflow";
-
   /**
    * createAccount creates a new account in the system or provider.
    *
@@ -17,4 +18,5 @@ public interface CreateAccountWorkflow {
    */
   @WorkflowMethod
   Account createAccount(Account details) throws StripeException;
+
 }
