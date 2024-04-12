@@ -75,12 +75,13 @@ sonarlintMain {
     reports {
         html {
             enabled = true
-            outputLocation = layout.buildDirectory.file("/reports/sonarlint")
+            outputLocation = layout.buildDirectory.file("/reports/sonarlint/sonarlint-report.html")
         }
         xml.enabled = true
         sarif.enabled = false
     }
 }
+
 
 sonarlint {
     // excludeRules = ['java:S1186']
