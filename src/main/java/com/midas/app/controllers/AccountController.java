@@ -66,14 +66,16 @@ public class AccountController implements AccountsApi {
   }
 
   @Override
-  public ResponseEntity<AccountDto> updateUserAccount(UUID accountId, AccountDto accountDto)
-      throws StripeException {
+  public ResponseEntity<AccountDto> updateUserAccount(UUID accountId, AccountDto accountDto) {
     logger.info("Updating account with account id: {}", accountId);
 
     Account account = new Account();
     Mapper.updateAccountFromDTO(account, accountDto);
-
-    return new ResponseEntity<>(
-        Mapper.toAccountDto(accountService.updateAccount(accountId, account)), HttpStatus.CREATED);
+    try {
+      Account account1 = accountService.updateAccount(accountId, account);
+      return new ResponseEntity<>(Mapper.toAccountDto(account1), HttpStatus.CREATED);
+    } catch (StripeException e) {
+      throw new ApiException(HttpStatus.BAD_GATEWAY, e.getMessage());
+    }
   }
 }
