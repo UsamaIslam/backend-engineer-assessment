@@ -182,3 +182,7 @@ docker-compose up -d
   ```
 
   This configuration changes the test output directory to `build/reports/tests`.
+
+### 7. Recordings
+- 1. https://drive.google.com/file/d/1R_9VG90g6cIW81mdOYTmKPsLSBRdkcPP/view?usp=drive_link
+- 2. https://drive.google.com/file/d/1njqnbuEOy6mw0Wciwcqc9z9DfOTofBW1/view?usp=drive_link
